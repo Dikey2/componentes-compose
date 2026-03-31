@@ -4,17 +4,32 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.Card
+import androidx.compose.material3.Checkbox
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Slider
+import androidx.compose.material3.Switch
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.componentescompose.ui.theme.ComponentesComposeTheme
-import androidx.compose.ui.Alignment
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,32 +50,56 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun PantallaComponentes(modifier: Modifier = Modifier) {
     LazyColumn(
-        modifier = modifier.padding(16.dp),
+        modifier = modifier
+            .fillMaxSize()
+            .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
 
         item {
-            Text("LazyColumn", fontWeight = FontWeight.Bold)
+            Text(
+                text = "Exploración de componentes",
+                fontWeight = FontWeight.Bold
+            )
+        }
+
+        item {
+            Text(
+                text = "LazyColumn",
+                fontWeight = FontWeight.Bold
+            )
             EjemploLazyColumn()
         }
 
         item {
-            Text("Card", fontWeight = FontWeight.Bold)
+            Text(
+                text = "Card",
+                fontWeight = FontWeight.Bold
+            )
             EjemploCard()
         }
 
         item {
-            Text("Checkbox", fontWeight = FontWeight.Bold)
+            Text(
+                text = "Checkbox",
+                fontWeight = FontWeight.Bold
+            )
             EjemploCheckbox()
         }
 
         item {
-            Text("Switch", fontWeight = FontWeight.Bold)
+            Text(
+                text = "Switch",
+                fontWeight = FontWeight.Bold
+            )
             EjemploSwitch()
         }
 
         item {
-            Text("Slider", fontWeight = FontWeight.Bold)
+            Text(
+                text = "Slider",
+                fontWeight = FontWeight.Bold
+            )
             EjemploSlider()
         }
     }
@@ -68,18 +107,27 @@ fun PantallaComponentes(modifier: Modifier = Modifier) {
 
 @Composable
 fun EjemploLazyColumn() {
-    LazyColumn {
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp)
+    ) {
         items(5) { index ->
-            Text("Item $index", modifier = Modifier.padding(8.dp))
+            Text(
+                text = "Item $index",
+                modifier = Modifier.padding(8.dp)
+            )
         }
     }
 }
 
 @Composable
 fun EjemploCard() {
-    Card(modifier = Modifier.fillMaxWidth()) {
+    Card(
+        modifier = Modifier.fillMaxWidth()
+    ) {
         Text(
-            text = "Esto es una Card",
+            text = "This is a Card",
             modifier = Modifier.padding(16.dp)
         )
     }
@@ -89,12 +137,14 @@ fun EjemploCard() {
 fun EjemploCheckbox() {
     var checked by remember { mutableStateOf(false) }
 
-    Row(verticalAlignment = Alignment.CenterVertically) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically
+    ) {
         Checkbox(
             checked = checked,
             onCheckedChange = { checked = it }
         )
-        Text("Opción seleccionable")
+        Text("Selectable option")
     }
 }
 
@@ -102,12 +152,14 @@ fun EjemploCheckbox() {
 fun EjemploSwitch() {
     var estado by remember { mutableStateOf(false) }
 
-    Row(verticalAlignment = Alignment.CenterVertically) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically
+    ) {
         Switch(
             checked = estado,
             onCheckedChange = { estado = it }
         )
-        Text("Activar / Desactivar")
+        Text("Enable / Disable")
     }
 }
 
@@ -120,7 +172,7 @@ fun EjemploSlider() {
             value = valor,
             onValueChange = { valor = it }
         )
-        Text("Valor: ${valor.toInt()}")
+        Text("Value: ${valor.toInt()}")
     }
 }
 
